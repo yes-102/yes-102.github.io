@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Y02 Website</title>
+<link rel="icon" href="Images/LogoColor.png">
 <meta charset="UTF-8">
 
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
@@ -9,7 +10,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body,h1,h2,h3,h4,h5,h6 {
+    font-family: "Lato", sans-serif;
+    color: #252525;
+}
 
 /* Create a Parallax Effect */
 .banner {
@@ -26,13 +30,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
   background-size: cover;
 }
 
-.image1 {
+.bannerProjects {
   /* The image used */
-  background-image: url("Images/Banner.png");
+  background-image: url("Images/CurrentProjects.png");
 
   /* Set a specific height */
-  min-height: 700px; 
-
+  min-height: 500px; 
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -40,6 +43,36 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.bannerTeam {
+  /* The image used */
+  background-image: url("Images/TheTeam.png");
+
+  /* Set a specific height */
+  min-height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bannerContact {
+  /* The image used */
+  background-image: url("Images/DroneShot.png");
+
+  /* Set a specific height */
+  min-height: 500px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 /* navbar*/
 
 .Navbar {
@@ -59,7 +92,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 
 .NavbarColor {
     background-color: #089ca3;
-    box-shadow: #252525 5px 5px 5px;
+    box-shadow: #252525 0px 0px 15px;
     animation-name: NavbarColor;
     animation-duration: 0.5s;
 }
@@ -141,46 +174,73 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
         <i class="fa fa-bars"></i>
       </a> -->
       <a href="#home" class="Navbar-Button">HOME</a>
-      <a href="#about" class="Navbar-Button"><i class="fa fa-user"></i> ABOUT</a>
-      <a href="#portfolio" class="Navbar-Button"><i class="fa fa-th"></i> PORTFOLIO</a>
+      <a href="#team" class="Navbar-Button"><i class="fa fa-user"></i> MEET THE TEAM</a>
+      <a href="#projects" class="Navbar-Button"><i class="fa fa-th"></i> CURRENT PROJECT</a>
       <a href="#contact" class="Navbar-Button"><i class="fa fa-envelope"></i> CONTACT</a>
 </div>
 
+
+<!-- [ home section ] -->
 <div class="banner" id="home">
     <img src="Images/LogoFrontPage.png" class="center" alt="Company Logo">
 </div>
 
-<p>Scroll Up and Down this page to see the parallax scrolling effect.</p>
-
-<div style="height:100px;background-color:white;font-size:36px">
-Scroll Up and Down this page to see the parallax scrolling effect.
-This div is just here to enable scrolling.
-Tip: Try to remove the background-attachment property to remove the scrolling effect.
+<div class="center" style="text-align:center ;">
+    <h1>About Y02</h1>
+    <p>We as Y102 are a <s>hard</s>working team. We strive to deliver quitly in the lazziest way possible. Our core values consites of music.</p>
 </div>
+<div style="height: 200px; ;"></div>
 
-<div class="image1">
-    <img src="Images/LogoColor.png" alt="Company Logo" class="center">
+
+
+<!-- [ team section ] -->
+<div class="bannerTeam" id="team"></div>
+
+<div class="center" style="text-align:center ;">
+    <h1>Who is Y102?</h1>
+    <h2>meet the team:</h2>
+    some peeps
 </div>
+<div style="height: 200px; ;"></div>
 
-<div style="height:100px;background-color:white;font-size:36px">
-    Scroll Up and Down this page to see the parallax scrolling effect.
-    This div is just here to enable scrolling.
-    Tip: Try to remove the background-attachment property to remove the scrolling effect.
+
+
+<!-- [ projects section ] -->
+<div class="bannerProjects" id="team"></div>
+
+<div class="center" style="text-align:center ;">
+    <h1>Current ongoing projects</h1>
+    <p>We have mutiple ongoing projects, only striveing to achive the very best</p>
+</div>
+<div style="height: 200px; ;"></div>
+
+
+
+<!-- [ future section ] -->
+<div class="banner" id="futureProject"></div>
+
+<div class="center" style="text-align:center ;">
+    <h1>Future Projects</h1>
+    <p>Plans for our future, get a peek into what the possibilties are</p>
+</div>
+<div style="height: 200px; ;"></div>
+
+<!-- [ contact section ] -->
+<div class="bannerContact" id="contact"></div>
+
+<div class="center" style="text-align:center;">
+    <h1>Contact information:</h1>
+    <div style="font-size:32px;">
+        <i class="fa fa-map-marker fa-fw"></i> Dedemsvaart, The Netherlands<br>
+        <i class="fa fa-phone fa-fw"></i> Phone: +31 6 54910030<br>
+        <i class="fa fa-envelope fa-fw"></i> Email: yes-102@outlook.com<br>
     </div>
-
-
-<!-- Container (Contact Section) -->
-<div id="contact">
-    <div class="w3-large w3-margin-bottom">
-        <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Dedemsvaart, The Netherlands<br>
-        <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +31 6 54910030<br>
-        <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: yes-102@outlook.com<br>
-      </div>
 </div>
-  
-<div style="height:200px;">
 
-</div>
+
+<div style="height:150px;"></div>
+<div style="height:10px;background-color: #089ca3;"></div>
+<div style="height:50px;"></div>
 
 
 
