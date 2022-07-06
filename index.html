@@ -1,313 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='' xml:lang=''>
 <head>
-<title>Y02 Website</title>
-<link rel="icon" href="Images/LogoColor.png">
-<meta charset="UTF-8">
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, user-scalable=no' />
+	<title>Tagalearn</title>
+	<style type='text/css'>
 
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		body {
+			touch-action: none;
+			margin: 0;
+			border: 0 none;
+			padding: 0;
+			text-align: center;
+			background-color: black;
+		}
 
-<style>
-body,h1,h2,h3,h4,h5,h6 {
-    font-family: "Lato", sans-serif;
-    color: #252525;
-}
+		#canvas {
+			display: block;
+			margin: 0;
+			color: white;
+		}
 
-/* Create a Parallax Effect */
-.banner {
-  /* The image used */
-  background-image: url("Images/Banner.png");
+		#canvas:focus {
+			outline: none;
+		}
 
-  /* Set a specific height */
-  min-height: 700px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bannerProjects {
-  /* The image used */
-  background-image: url("Images/CurrentProjects.png");
-
-  /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bannerFutureProjects {
-  /* The image used */
-  background-image: url("Images/Anime.png");
-
-  /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bannerTeam {
-  /* The image used */
-  background-image: url("Images/TheTeam.png");
-
-  /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bannerContact {
-  /* The image used */
-  background-image: url("Images/DroneShot.png");
-
-  /* Set a specific height */
-  min-height: 500px; 
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+		.godot {
+			font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+			color: #e0e0e0;
+			background-color: #3b3943;
+			background-image: linear-gradient(to bottom, #403e48, #35333c);
+			border: 1px solid #45434e;
+			box-shadow: 0 0 1px 1px #2f2d35;
+		}
 
 
-/* navbar*/
+		/* Status display
+		 * ============== */
 
-.Navbar {
-    height: 49px;
-    top: 0px;
-    background-color: #089ca300;
+		#status {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/* don't consume click events - make children visible explicitly */
+			visibility: hidden;
+		}
 
-    position: fixed;
-    width: 100%;
+		#status-progress {
+			width: 366px;
+			height: 7px;
+			background-color: #38363A;
+			border: 1px solid #444246;
+			padding: 1px;
+			box-shadow: 0 0 2px 1px #1B1C22;
+			border-radius: 2px;
+			visibility: visible;
+		}
 
-}
+		@media only screen and (orientation:portrait) {
+			#status-progress {
+				width: 61.8%;
+			}
+		}
 
-@keyframes NavbarColor {
-  from {background-color: #089ca300;}
-  to {background-color: #089ca3;}
-}
+		#status-progress-inner {
+			height: 100%;
+			width: 0;
+			box-sizing: border-box;
+			transition: width 0.5s linear;
+			background-color: #202020;
+			border: 1px solid #222223;
+			box-shadow: 0 0 1px 1px #27282E;
+			border-radius: 3px;
+		}
 
-.NavbarColor {
-    background-color: #089ca3;
-    box-shadow: #252525 0px 0px 15px;
-    animation-name: NavbarColor;
-    animation-duration: 0.5s;
-}
+		#status-indeterminate {
+			visibility: visible;
+			position: relative;
+		}
 
-.Navbar-Button {
-    background-color: none;
+		#status-indeterminate > div {
+			width: 4.5px;
+			height: 0;
+			border-style: solid;
+			border-width: 9px 3px 0 3px;
+			border-color: #2b2b2b transparent transparent transparent;
+			transform-origin: center 21px;
+			position: absolute;
+		}
 
-    padding: 15px 16px;
-    float: left;
-    width: auto;
-    border: none;
-    display: block;
-    outline: 0;
+		#status-indeterminate > div:nth-child(1) { transform: rotate( 22.5deg); }
+		#status-indeterminate > div:nth-child(2) { transform: rotate( 67.5deg); }
+		#status-indeterminate > div:nth-child(3) { transform: rotate(112.5deg); }
+		#status-indeterminate > div:nth-child(4) { transform: rotate(157.5deg); }
+		#status-indeterminate > div:nth-child(5) { transform: rotate(202.5deg); }
+		#status-indeterminate > div:nth-child(6) { transform: rotate(247.5deg); }
+		#status-indeterminate > div:nth-child(7) { transform: rotate(292.5deg); }
+		#status-indeterminate > div:nth-child(8) { transform: rotate(337.5deg); }
 
-    margin: auto;
+		#status-notice {
+			margin: 0 100px;
+			line-height: 1.3;
+			visibility: visible;
+			padding: 4px 6px;
+			visibility: visible;
+		}
+	</style>
+<link id='-gd-engine-icon' rel='icon' type='image/png' href='index.icon.png' />
+<link rel='apple-touch-icon' href='index.apple-touch-icon.png'/>
 
-    text-align: center;
-    text-decoration: none;
-
-    color: aliceblue;
-}
-
-.Navbar-Button:hover {
-    background-color: aliceblue;
-
-    border: 1 px solid #252525;
-
-
-    color: #252525;
-}
-
-/*other stuff*/
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
-
-/* Turn off parallax scrolling for tablets and phones */
-/* @media only screen and (max-device-width: 1600px) {
-  .bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: scroll;
-    min-height: 400px;
-  }
-} */
-
-</style>
 </head>
-<body style="margin: 0;">
+<body>
+	<canvas id='canvas'>
+		HTML5 canvas appears to be unsupported in the current browser.<br />
+		Please try updating or use a different browser.
+	</canvas>
+	<div id='status'>
+		<div id='status-progress' style='display: none;' oncontextmenu='event.preventDefault();'><div id ='status-progress-inner'></div></div>
+		<div id='status-indeterminate' style='display: none;' oncontextmenu='event.preventDefault();'>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<div id='status-notice' class='godot' style='display: none;'></div>
+	</div>
 
-<!-- [ HEY! ] -->
-<!--  
-    Don't fo reading this.
-    Why are you even looking at the html code :')
-    it sucks okay. Only made this in one day time. I know I should've used a template.
-    But I this is what I mean with putting a lot of effort in things I should not put effort in.
-    And don't put effor in the things I should :')
-    
-    So hehe. Just please ignore this terrible site XD
-    But hey, as a reward for acctuatlly finding this sercret message, here is a secret code I'll give you ;)
-    So you better remeber it, or note it down someowhere, you just might be able to use it later at some point ;)
-    
-    secret code:
-    [3GF69RL] 
+	<script type='text/javascript' src='index.js'></script>
+	<script type='text/javascript'>//<![CDATA[
 
-    :)
-    anyway, enjoy your day
--->
+		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":99457712,"index.wasm":17503191},"focusCanvas":true,"gdnativeLibs":[]};
+		var engine = new Engine(GODOT_CONFIG);
 
-<div class="Navbar NavbarTop" id="Navbar">
-      <a href="#home" class="Navbar-Button">HOME</a>
-      <a href="#team" class="Navbar-Button"><i class="fa fa-user"></i> ABOUT</a>
-      <a href="#projects" class="Navbar-Button"><i class="fa fa-th"></i> PROJECTS</a>
-      <a href="#future" class="Navbar-Button"><i class="fa fa-calendar-plus-o"></i> SOMETHING</a>
-      <a href="#contact" class="Navbar-Button"><i class="fa fa-envelope"></i> CONTACT</a>
-</div>
+		(function() {
+			const INDETERMINATE_STATUS_STEP_MS = 100;
+			var statusProgress = document.getElementById('status-progress');
+			var statusProgressInner = document.getElementById('status-progress-inner');
+			var statusIndeterminate = document.getElementById('status-indeterminate');
+			var statusNotice = document.getElementById('status-notice');
 
+			var initializing = true;
+			var statusMode = 'hidden';
 
-<!-- [ home section ] -->
-<div class="banner" id="home">
-    <img src="Images/LogoFrontPage.png" class="center" alt="Company Logo">
-</div>
+			var animationCallbacks = [];
+			function animate(time) {
+				animationCallbacks.forEach(callback => callback(time));
+				requestAnimationFrame(animate);
+			}
+			requestAnimationFrame(animate);
 
-<div class="center" style="text-align:center ;">
-    <h1>Some text</h1>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis incidunt ad eveniet, est enim, exercitationem consequuntur, quos tempora voluptate ipsam accusantium. Esse itaque est nemo nihil alias vel accusamus a.
-    </p>
-    <p>
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo itaque error cumque provident pariatur libero consequatur. Ratione, accusamus, quibusdam perspiciatis dicta blanditiis incidunt inventore expedita pariatur harum voluptatum voluptatem eum?
-    </p>
-    <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima at officiis saepe quia doloribus ducimus totam fugiat, a culpa! Quis praesentium error adipisci ullam animi vero sed, earum consequatur a?
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem asperiores explicabo recusandae expedita autem corporis, porro commodi architecto consequatur error, quod illo dolorum assumenda nemo aspernatur quibusdam aperiam tenetur! Dolorum!
-    </p>
-</div>
-<div style="height: 200px; ;"></div>
+			function setStatusMode(mode) {
 
+				if (statusMode === mode || !initializing)
+					return;
+				[statusProgress, statusIndeterminate, statusNotice].forEach(elem => {
+					elem.style.display = 'none';
+				});
+				animationCallbacks = animationCallbacks.filter(function(value) {
+					return (value != animateStatusIndeterminate);
+				});
+				switch (mode) {
+					case 'progress':
+						statusProgress.style.display = 'block';
+						break;
+					case 'indeterminate':
+						statusIndeterminate.style.display = 'block';
+						animationCallbacks.push(animateStatusIndeterminate);
+						break;
+					case 'notice':
+						statusNotice.style.display = 'block';
+						break;
+					case 'hidden':
+						break;
+					default:
+						throw new Error('Invalid status mode');
+				}
+				statusMode = mode;
+			}
 
+			function animateStatusIndeterminate(ms) {
+				var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
+				if (statusIndeterminate.children[i].style.borderTopColor == '') {
+					Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
+						child.style.borderTopColor = '';
+					});
+					statusIndeterminate.children[i].style.borderTopColor = '#dfdfdf';
+				}
+			}
 
+			function setStatusNotice(text) {
+				while (statusNotice.lastChild) {
+					statusNotice.removeChild(statusNotice.lastChild);
+				}
+				var lines = text.split('\n');
+				lines.forEach((line) => {
+					statusNotice.appendChild(document.createTextNode(line));
+					statusNotice.appendChild(document.createElement('br'));
+				});
+			};
 
+			function displayFailureNotice(err) {
+				var msg = err.message || err;
+				console.error(msg);
+				setStatusNotice(msg);
+				setStatusMode('notice');
+				initializing = false;
+			};
 
-<div class="center" style="background-color: #eeeeee; height: 250px; border-radius: 30px 30px 30px 30px; width: 60%; margin-right: 50px; margin-top: 50px;">
-    <div style="width:100%; height: 50px; background-color: #089ca3; position: inherit; border-radius: 30px 30px 0px 0px;">
-        <a style="color: aliceblue; float:right; padding-right: 20px; padding-top: 15px;">some text</a>
-        <h1 style="color: aliceblue; padding-left: 20px; padding-top: 5px;">title</h1>
-    </div>
-    <div style="float:left; height:200px;" >
-        <img src="Images/Person6.png" alt="profile picture" style="max-width:100%;max-height:100%;border-radius: 0 0 0 30px;">
-    </div>
-    <div style="padding-left: 210px; padding-top: 5px;">
-        <a style="color:#404040;"><i>sub text</i></a>
-        <p>
-            DESC
-        </p>
-    </div>
-</div>
-
-
-<div style="height: 200px;"></div>
-
-
-
-<!-- [ projects section ] -->
-<div class="bannerProjects" id="projects"></div>
-
-<div class="center" style="text-align:center ;">
-    <h1>ongoing projects</h1>
-    <p>some text</p>
-</div>
-
-<div class="center" style="background-color: #eeeeee; height: 150px; border-radius: 30px 30px 30px 30px; width: 60%;margin-top: 50px;">
-    <div style="width:100%; height: 50px; background-color: #089ca3; position: inherit; border-radius: 30px 30px 0px 0px; text-align: center;">
-        <h1 style="color: aliceblue; padding-left: 20px; padding-top: 5px;">Tagalearn</h1>
-    </div>
-    <div style="padding: 20px; padding-top: 0px;">
-        <p>
-            HEy, I made an app for learning tagalog.
-        </p>
-    </div>
-</div>
-
-
-<div class="center" style="background-color: #eeeeee; height: 150px; border-radius: 30px 30px 30px 30px; width: 60%;margin-top: 50px;">
-    <div style="width:100%; height: 50px; background-color: #089ca3; position: inherit; border-radius: 30px 30px 0px 0px; text-align: center;">
-        <h1 style="color: aliceblue; padding-left: 20px; padding-top: 5px;">Hey I made some games</h1>
-    </div>
-    <div style="padding: 20px; padding-top: 0px;">
-        <p>
-            Check Out my itch.io page or something
-        </p>
-    </div>
-</div>
-
-
-
-<div style="height: 200px; ;"></div>
-
-<!-- [ contact section ] -->
-<div class="bannerContact" id="contact"></div>
-
-<div class="center" style="text-align:center;">
-    <h1>Contact information:</h1>
-    <div style="font-size:32px;">
-        <i class="fa fa-map-marker fa-fw"></i> Dedemsvaart, The Netherlands<br>
-        <i class="fa fa-phone fa-fw"></i> Phone: +31 6 54910030<br>
-        <i class="fa fa-envelope fa-fw"></i> Email: yes-102@outlook.com<br>
-    </div>
-</div>
-
-
-<div style="height:150px;"></div>
-<div style="height:10px;background-color: #089ca3;"></div>
-<div style="height:50px;"></div>
-<div style="text-align:center; color: #aaaaaa;">love you</div>
-<div style="height:10px;"></div>
-
-
-
+			if (!Engine.isWebGLAvailable()) {
+				displayFailureNotice('WebGL not available');
+			} else {
+				setStatusMode('indeterminate');
+				engine.startGame({
+					'onProgress': function (current, total) {
+						if (total > 0) {
+							statusProgressInner.style.width = current/total * 100 + '%';
+							setStatusMode('progress');
+							if (current === total) {
+								// wait for progress bar animation
+								setTimeout(() => {
+									setStatusMode('indeterminate');
+								}, 500);
+							}
+						} else {
+							setStatusMode('indeterminate');
+						}
+					},
+				}).then(() => {
+					setStatusMode('hidden');
+					initializing = false;
+				}, displayFailureNotice);
+			}
+		})();
+	//]]></script>
 </body>
 </html>
-<script>
 
-    // Change style of navbar on scroll
-window.onscroll = function() {myFunction()};
-function myFunction() {
-    var navbar = document.getElementById("Navbar");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        navbar.className = "Navbar" + " NavbarColor";
-    } else {
-        navbar.className = navbar.className.replace("NavbarColor", "");
-    }
-}
-
-</script>
-
-
-<!-- 
-<img src="Images/Banner.png" alt="Background Image Of Code">
-hello world -->
